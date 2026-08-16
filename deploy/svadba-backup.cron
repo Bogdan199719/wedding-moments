@@ -1,0 +1,1 @@
+17 3 * * * root /usr/local/sbin/svadba-backup >> /var/log/svadba-backup.log 2>&1

@@ -1,0 +1,10 @@
+* text=auto
+
+*.sh text eol=lf
+Dockerfile text eol=lf
+Caddyfile text eol=lf
+deploy/svadba-backup text eol=lf
+
+*.png binary
+*.webp binary
+*.woff2 binary

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+exec 9>/run/lock/svadba-backup.lock
+flock -n 9 || exit 0
+cd /opt/svadba
+mkdir -p backups
+stamp=$(date -u +%Y%m%dT%H%M%SZ)
+docker compose stop app >/dev/null
+trap 'docker compose start app >/dev/null' EXIT
+volume=$(docker volume inspect svadba_wedding-data --format '{{ .Mountpoint }}')
+tar -czf "backups/svadba-$stamp.tar.gz" -C "$volume" .
+docker compose start app >/dev/null
+trap - EXIT
+mapfile -t old_backups < <(find backups -maxdepth 1 -type f -name 'svadba-*.tar.gz' -printf '%T@ %p\n' | sort -rn | tail -n +4 | cut -d' ' -f2-)
+if ((${#old_backups[@]})); then
+  rm -- "${old_backups[@]}"
+fi

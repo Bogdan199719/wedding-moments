@@ -1,0 +1,56 @@
+{
+  "name": "wedding-moments",
+  "version": "1.0.0",
+  "description": "Self-hosted wedding photo and video collection via QR code with resumable uploads, private admin and a guest gallery.",
+  "keywords": [
+    "wedding",
+    "photo-upload",
+    "video-upload",
+    "qr-code",
+    "self-hosted"
+  ],
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint src tests",
+    "qr": "tsx scripts/generate-qr.ts",
+    "backup": "tsx scripts/backup.ts"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^11.0.2",
+    "@fastify/multipart": "^9.2.1",
+    "@fastify/rate-limit": "^10.3.0",
+    "@fastify/static": "^8.3.0",
+    "@fontsource/bodoni-moda": "^5.3.0",
+    "@fontsource/manrope": "^5.3.0",
+    "@phosphor-icons/web": "^2.1.2",
+    "archiver": "^7.0.1",
+    "better-sqlite3": "^12.10.0",
+    "fastify": "^5.10.0",
+    "file-type": "^21.0.0",
+    "qrcode": "^1.5.4",
+    "sharp": "^0.35.3"
+  },
+  "devDependencies": {
+    "@types/archiver": "^6.0.3",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^22.19.19",
+    "@types/qrcode": "^1.5.6",
+    "eslint": "^9.39.4",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.49.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.0": true,
+    "better-sqlite3@12.11.1": true
+  }
+}
